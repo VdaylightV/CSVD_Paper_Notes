@@ -67,7 +67,7 @@
 
   50 patients of 1000 data 
 
-  <u>brain stroke caused by cerebral small vessel disease is marked</u>
+  ##### <u>brain stroke caused by cerebral small vessel disease is marked</u>
 
   the following information of lesion are included	
 
@@ -76,10 +76,64 @@
   - symptoms 
 
 - **The features of the model:**
+  
   - CPU-based
   - 7-layers structure at most
 
 ## The proposed methods
 
 ### Data Preprocessing
+
+> <u>Connected-component labeling:</u>
+>
+> - Aim: to detect connected regions in binary digital images
+> - One pass algorithm:
+>   - Output: Different connected component  are labeled with different label
+> - Two pass algorithm:
+>   - First pass: find all the connected component and labels them, while store all the equivalence of the labels
+>   - Second pass: merge all the equivalent labels
+
+- a. Image binarization
+- b. Remove head shell
+- c. Image binarization(reverse)
+- Union of b. and c.
+- mask the image and result
+
+### Training Model
+
+**Key Idea:**
+
+- Use the MRI segmentation of the brain based in the patch CNN method
+
+  > Divide the picture into many 7×7 patches
+
+  > Combine all the patches can get the complete and accurate image
+
+**Measurement:**
+
+- Confusion Matrix:
+
+  - TP: Positive and classifier assumes it as Positive
+  - TN: Negative and classifier assumes it as negative 
+  - FP: Negative and classifier assumes it as positive
+  - FN: Positive and classifier assumes it as negative
+
+- Precision:
+  $$
+  Presion = \frac{TP}{TP + FP}
+  $$
+
+- Recall:
+
+$$
+Recall = \frac{TP}{FN+TP}
+$$
+
+- F1 Score:
+  $$
+  F1~Score = \frac{2}{\frac{1}{Recall} + \frac{1}{Precision}}
+  $$
+  
+
+
 
